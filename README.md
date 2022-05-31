@@ -34,7 +34,7 @@ Step 4: Download the DeepSpeech examples
 git clone https://github.com/mozilla/DeepSpeech-examples
 ```
 
-Step 5: Modify to allow for text to windown input
+Step 5: Modify the realtime speach recognition example `mic_vad_streaming` to output the text into the currently focued windown using `xdotool`
 ```
 cd DeepSpeech-examples/mic_vad_streaming
 nano mic_vad_streaming.py
@@ -45,15 +45,15 @@ Add import at top
 import subprocess
 ```
 
-Add new line after L196
+Add new line after L195
 ```
 text = stream_context.finishStream()
-print("Recognized: %s" % text)
+print("Recognized: %s" % text) # You can delete this line if you want
 subprocess.call(["xdotool", "type", text]) # add this line
 stream_context = model.createStream()
 ```
 
-Step 6: Install dependancies for mid_val_streaming (see README.rst)
+Step 6: Install dependancies for `mid_val_streaming` (see README.rst)
 ```
 sudo apt install portaudio19-dev -y
 pip install -r requirements.txt
