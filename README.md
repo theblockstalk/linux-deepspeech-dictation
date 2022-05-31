@@ -2,6 +2,11 @@
 
 ## Dependancies
 
+Step 0: install xdotool
+```
+sudo apt install -y xdotool
+```
+
 Step 1: Install Deepspeech
 https://deepspeech.readthedocs.io/en/r0.9/?badge=latest
 ```
@@ -30,15 +35,15 @@ nano mic_vad_streaming.py
 
 Add import at top
 ```
-import ...
+import subprocess
 ```
 
 Add new line after L196
 ```
-            text = stream_context.finishStream()
-            print("Recognized: %s" % text)
-            ...
-            stream_context = model.createStream()
+text = stream_context.finishStream()
+print("Recognized: %s" % text)
+subprocess.call(["xdotool", "type", text])
+stream_context = model.createStream()
 ```
 
 ### Run
