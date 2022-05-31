@@ -28,9 +28,27 @@ cd DeepSpeech-examples/mic_vad_streaming
 nano mic_vad_streaming.py
 ```
 
+Add import at top
+```
+import ...
+```
+
+Add new line after L196
+```
+            text = stream_context.finishStream()
+            print("Recognized: %s" % text)
+            ...
+            stream_context = model.createStream()
+```
+
 ### Run
 ```
 python mic_vad_straming.py --model ~/deepspeech-0.9.3-models.pbmm --scorer ~/deepspeech-0.9.3-models.scorer
 ```
+
+### TODO
+1. Allow for punctionation marks (.,:() etc)
+2. When + key is pressed then turn on and off speach and input
+3. Test in various windows: browsers (url bar, forms, text input, notion, google docs, gmail, taiga, discord, rocket chat), VS code, text editors, Libre office word and sheet
 
 
