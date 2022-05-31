@@ -2,7 +2,7 @@
 
 ## Dependancies
 
-Step 1: Install xdotool
+Step 1: Install xdotool (alternatively need to use [waylan](https://wayland.app/protocols/text-input-unstable-v3#zwp_text_input_v3:event:commit_string) if your system uses this)
 ```
 sudo apt install -y xdotool
 ```
