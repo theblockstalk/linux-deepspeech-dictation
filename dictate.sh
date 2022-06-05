@@ -46,6 +46,21 @@ function stop {
     PID=`cat ${PARENT_PATH}/data/pid.txt`
     echo "Killing process with pid=${PID}"
     pkill ${PID}
+    echo "success code=${?}"
+    echo "" > ${PARENT_PATH}/data/pid.txt
+}
+
+function switch {
+    PID=`cat ${PARENT_PATH}/data/pid.txt`
+    if [ -z "${PID}" ]; then
+        start
+    else
+        stop
+    fi
+}
+
+function sethotkeys {
+    bind -x "\"\C-o\":${PARENT_PATH}/dictate.sh start"
 }
 
 function help {
@@ -55,8 +70,9 @@ function help {
     echo ""
     echo "Commands:"
     echo "    install - installs all prerequisits for an Ubuntu 20.0.4 machine"
-    echo "    start   - starts dictation with hotkey"
-    echo "    stop    - stops dictation with hotkey"
+    echo "    start   - starts dictation"
+    echo "    stop    - stops dictation"
+    echo "    stop    - sets hotkey Ctr+o to change dictation on or off"
 }
 
 if [ -z "${ARG1}" ]; then
@@ -67,6 +83,10 @@ elif [ "${ARG1}" == "start" ]; then
     start
 elif [ "${ARG1}" == "stop" ]; then
     stop
+elif [ "${ARG1}" == "switch" ]; then
+    switch
+elif [ "${ARG1}" == "sethotkeys" ]; then
+    sethotkeys
 else
     help
 fi
