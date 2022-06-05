@@ -25,10 +25,17 @@ function install {
     echo "Download pre-trained English model files"
     curl -L -o data/deepspeech-0.9.3-models.pbmm https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
     curl -L -o data/deepspeech-0.9.3-models.scorer https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
+
+    echo "Installing mic_vad_straming python dependancy: portaudio19"
+    sudo apt install portaudio19-dev -y
+
+    echo "Installing mic_vad_straming python dependancies"
+    cd ${PARENT_PATH}/mic_vad_streaming
+    pip install -r requirements.txt
 }
 
 function start {
-    python mic_vad_streaming.py --model ~/deepspeech-0.9.3-models.pbmm --scorer ~/deepspeech-0.9.3-models.scorer
+    python mic_vad_streaming.py --model ./data/deepspeech-0.9.3-models.pbmm --scorer ./data/deepspeech-0.9.3-models.scorer
 }
 
 function help {
@@ -41,7 +48,6 @@ function help {
     echo "    start   - starts dictation with hotkey"
     echo "    stop    - stops dictation with hotkey"
 }
-
 
 if [ -z "${ARG1}" ]; then
     help
