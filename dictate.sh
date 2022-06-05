@@ -35,7 +35,7 @@ function install {
 }
 
 function start {
-    python mic_vad_streaming.py --model ./data/deepspeech-0.9.3-models.pbmm --scorer ./data/deepspeech-0.9.3-models.scorer
+    python ${PARENT_PATH}/mic_vad_streaming/mic_vad_streaming.py --model ${PARENT_PATH}/data/deepspeech-0.9.3-models.pbmm --scorer ${PARENT_PATH}/data/deepspeech-0.9.3-models.scorer
 }
 
 function help {
