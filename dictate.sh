@@ -13,16 +13,15 @@ function install {
     sudo apt install -y xdotool
 
     echo "Installing python3"
-    sudo apt install -y python3-virtualenv
-
-    echo "Create and activate a virtualenv"
-    virtualenv -p python3 $HOME/tmp/deepspeech-venv/
-    source $HOME/tmp/deepspeech-venv/bin/activate
-
+    sudo apt install -y python3 python3-pip
+    
     echo "Install DeepSpeech"
     pip3 install deepspeech
 
     echo "Download pre-trained English model files"
+    set +e
+    mkdir data
+    set -e
     curl -L -o data/deepspeech-0.9.3-models.pbmm https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
     curl -L -o data/deepspeech-0.9.3-models.scorer https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
 
@@ -31,11 +30,13 @@ function install {
 
     echo "Installing mic_vad_straming python dependancies"
     cd ${PARENT_PATH}/mic_vad_streaming
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
 }
 
 function start {
-    python ${PARENT_PATH}/mic_vad_streaming/mic_vad_streaming.py --model ${PARENT_PATH}/data/deepspeech-0.9.3-models.pbmm --scorer ${PARENT_PATH}/data/deepspeech-0.9.3-models.scorer
+    python3 ${PARENT_PATH}/mic_vad_streaming/mic_vad_streaming.py \
+        --model ${PARENT_PATH}/data/deepspeech-0.9.3-models.pbmm \
+        --scorer ${PARENT_PATH}/data/deepspeech-0.9.3-models.scorer
 }
 
 function help {
