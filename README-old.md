@@ -63,10 +63,3 @@ pip install -r requirements.txt
 ```
 python mic_vad_streaming.py --model ~/deepspeech-0.9.3-models.pbmm --scorer ~/deepspeech-0.9.3-models.scorer
 ```
-
-### TODO
-1. Allow for punctionation marks (.,:() etc)
-2. When + key is pressed then turn on and off speach and input
-3. Test in various windows: browsers (url bar, forms, text input, notion, google docs, gmail, taiga, discord, rocket chat), VS code, text editors, Libre office word and sheet
-4. Add command to feed a "correction" of selected wrong text back into the model
-5. 
