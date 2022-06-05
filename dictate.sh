@@ -34,9 +34,18 @@ function install {
 }
 
 function start {
+    echo "Starting dictate"
     python3 ${PARENT_PATH}/mic_vad_streaming/mic_vad_streaming.py \
         --model ${PARENT_PATH}/data/deepspeech-0.9.3-models.pbmm \
-        --scorer ${PARENT_PATH}/data/deepspeech-0.9.3-models.scorer
+        --scorer ${PARENT_PATH}/data/deepspeech-0.9.3-models.scorer &>> ${PARENT_PATH}/data/dictate.log &
+    echo $! > ${PARENT_PATH}/data/pid.txt
+}
+
+function stop {
+    echo "Stopping dictate"
+    PID=`cat ${PARENT_PATH}/data/pid.txt`
+    echo "Killing process with pid=${PID}"
+    pkill ${PID}
 }
 
 function help {
