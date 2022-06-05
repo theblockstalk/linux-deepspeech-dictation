@@ -8,6 +8,7 @@ import wave
 import webrtcvad
 from halo import Halo
 from scipy import signal
+import subprocess
 
 logging.basicConfig(level=20)
 
@@ -193,6 +194,7 @@ def main(ARGS):
                 wav_data = bytearray()
             text = stream_context.finishStream()
             print("Recognized: %s" % text)
+            subprocess.call(["xdotool", "type", text]) # add this line
             stream_context = model.createStream()
 
 if __name__ == '__main__':
